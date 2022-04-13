@@ -7,36 +7,36 @@
 
 int main(/*int argc, char *argv[], char *envp[]*/)
 {
-	pid_t child;
-	char *command[16], *tok, *lineptr = NULL;
+	pid_t hijo;
+	char *comando[20], *token, *linea = NULL;
 	size_t i, n; 
 	int status;
   
 	while (1)
 	{
 		printf("$ ");
-		if (getline(&lineptr, &n, stdin) == -1)
+		if (getline(&linea, &n, stdin) == -1)
 			break;
-		tok = strtok(lineptr, " \t\n\r"); 
-		for (i = 0; i < 16 && tok != NULL; i++)
+		token = strtok(linea, " \t\n\r"); 
+		for (i = 0; i < 20 && tok != NULL; i++)
 		{
-			command[i] = tok;
-			tok = strtok(NULL, " \t\n\r");
+			comando[i] = token;
+			token = strtok(NULL, " \t\n\r");
 		}
-		command[i] = NULL; 
-		child = fork();
-		if (child == 0)
+		comando[i] = NULL; 
+		hijo = fork();
+		if (hijo == 0)
 		{
-			if (execve(command[0], command, NULL))
+			if (execve(comando[0], comando, NULL))
 			{
 				perror("execve");
 				exit(EXIT_FAILURE);
 			}
 		}
-		if (child > 0) 
+		if (hijo > 0) 
 			wait(&status);
 	}
 	putchar('\n');
-	free(lineptr);
+	free(linea);
 	exit(status);
 }

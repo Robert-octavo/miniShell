@@ -8,11 +8,12 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 
+extern char **environ;
+
 char *findpath(char *comando);
 char *str_concat(char *str1, char *str2);
-char str_lenght(char *string);
+int str_lenght(char *string);
 char str_compare(char *str1, char *str2, int n);
 char *_getenv(const char *name);
 void print_env(void);
-
 #endif
